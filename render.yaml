@@ -1,0 +1,15 @@
+# One-click deploy to Render (https://render.com) — free Node web service.
+# In Render: New → Blueprint → connect this repo. Render provides PORT; the
+# server reads it automatically. No env vars are required (visitors paste their
+# own Anthropic key in the UI); optionally set ANTHROPIC_API_KEY to make the
+# chat work without pasting, and MEDILEAD_PASSWORD to gate the whole site.
+#
+# Note: Render's free filesystem is ephemeral, so data/medilead.json resets on
+# redeploy/restart. Fine for a demo; add a persistent disk for durable storage.
+services:
+  - type: web
+    name: medilead
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start

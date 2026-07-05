@@ -1,0 +1,13 @@
+{
+  "name": "medilead",
+  "version": "1.0.0",
+  "description": "MediLead — a 24/7 multilingual AI concierge that consults medical-tourism leads, captures hot-lead contact details, routes them to a sales manager, and follows up. Powered by the Claude API. Zero external dependencies — runs on Node's built-ins.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

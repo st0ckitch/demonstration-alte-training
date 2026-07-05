@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Caucasus Medical Center — Lead CRM</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230d9488'/%3E%3Cpath d='M12 6v12M6 12h12' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav"><div class="nav-inner"></div></nav>
+
+  <main class="wrap">
+    <div class="page-head">
+      <div>
+        <h1>Lead CRM</h1>
+        <p>Every conversation the concierge has is captured here — the backend where all the data lives.</p>
+      </div>
+      <button class="btn btn-ghost" id="refresh" type="button"></button>
+    </div>
+
+    <div class="kpis" id="kpis"></div>
+
+    <div class="panel" style="margin-bottom:22px" id="cat-panel" hidden>
+      <div class="panel-head"><b>Leads by treatment</b><span class="lead-sub">routed to specialists</span></div>
+      <div class="cat-bars" id="cat-bars"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><b>Captured leads</b><span class="lead-sub" id="lead-count"></span></div>
+      <div id="table-host"></div>
+    </div>
+  </main>
+
+  <!-- Lead drawer -->
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <div class="avatar" id="d-avatar">–</div>
+      <div style="flex:1">
+        <b id="d-name" style="font-size:16px;letter-spacing:-.01em">Lead</b>
+        <div class="lead-sub" id="d-meta"></div>
+      </div>
+      <button class="icon-btn" id="d-close" type="button" aria-label="Close"></button>
+    </div>
+    <div class="drawer-body" id="d-body"></div>
+  </aside>
+
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Caucasus Medical Center — AI Concierge</title>
+  <meta name="description" content="A 24/7 multilingual AI concierge that consults medical-tourism patients, captures leads, and routes them to the right specialist at Caucasus Medical Center." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230d9488'/%3E%3Cpath d='M12 6v12M6 12h12' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav"><div class="nav-inner"></div></nav>
+
+  <main class="wrap">
+    <div class="split">
+      <!-- Hero / value proposition -->
+      <section class="hero">
+        <span class="hero-eyebrow" id="hero-model">● Powered by Claude</span>
+        <h1>Your <em>24/7 multilingual</em> medical-tourism concierge.</h1>
+        <p class="lede">
+          Caucasus Medical Center greets every enquiry instantly, in the patient's own language,
+          gives real consultation, and quietly captures the details your team needs — day or night.
+        </p>
+
+        <div class="feature-list">
+          <div class="feature">
+            <span class="fi" id="fi-clock"></span>
+            <div><b>Always on, across time zones</b><span>No more lost leads while the office sleeps — every enquiry is answered the moment it lands.</span></div>
+          </div>
+          <div class="feature">
+            <span class="fi" id="fi-globe"></span>
+            <div><b>Speaks the patient's language</b><span>Detects and replies in the visitor's language automatically — no interpreter, no delay.</span></div>
+          </div>
+          <div class="feature">
+            <span class="fi" id="fi-route"></span>
+            <div><b>Captures &amp; routes hot leads</b><span>Saves contact details to the CRM and assigns the right specialist by treatment.</span></div>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat"><b>24/7</b><span>coverage, no shifts</span></div>
+          <div class="stat"><b>+25%</b><span>leads recovered</span></div>
+          <div class="stat"><b>~$2k</b><span>saved per month</span></div>
+        </div>
+      </section>
+
+      <!-- Chat -->
+      <section class="chat">
+        <div class="chat-head">
+          <div class="avatar">C</div>
+          <div class="who">
+            <b>CMC Concierge</b>
+            <span><i class="status-dot"></i> Online · replies instantly</span>
+          </div>
+          <button class="btn btn-ghost" id="new-chat" type="button">New chat</button>
+        </div>
+
+        <div class="messages" id="messages"></div>
+
+        <div class="suggestions" id="suggestions"></div>
+
+        <form class="composer" id="composer">
+          <textarea id="input" rows="1" placeholder="Ask about a treatment, cost, or travel…" autocomplete="off"></textarea>
+          <button class="send" id="send" type="submit" aria-label="Send"></button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
