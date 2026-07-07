@@ -1,0 +1,218 @@
+{
+  "conversations": {
+    "demo-james": {
+      "id": "demo-james",
+      "created_at": "2026-07-04T14:12:00.000Z",
+      "updated_at": "2026-07-04T14:20:00.000Z",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hi, I'm looking into dental implants abroad. How much would a full set cost in Georgia?",
+          "created_at": "2026-07-04T14:12:00.000Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Great question! Full-arch dental implants at our partner clinics in Tbilisi typically run a fraction of UK prices — often around £4,000–£7,000 for a full arch depending on the technique, versus £15,000+ in the UK. The clinics are internationally accredited with English-speaking implantologists. May I ask roughly how many implants you're considering, and where you'd be travelling from?",
+          "created_at": "2026-07-04T14:13:00.000Z"
+        },
+        {
+          "role": "user",
+          "content": "I'm in Manchester. Probably a full upper arch. Ideally in the next month or two.",
+          "created_at": "2026-07-04T14:16:00.000Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Perfect — Manchester has direct routes to Tbilisi, and a full upper arch is a very common procedure for us. To have one of our implant specialists put together a personalised plan and quote, could I take your name and the best email or WhatsApp number to reach you?",
+          "created_at": "2026-07-04T14:17:00.000Z"
+        },
+        {
+          "role": "user",
+          "content": "James Carter, james.carter@gmail.com, +44 7700 900123",
+          "created_at": "2026-07-04T14:19:00.000Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Thank you, James — that's all noted. Nino Kapanadze, our dental coordinator, will personally email you a tailored treatment plan and quote within one business day. If anything comes up before then, just message here anytime. 😊",
+          "created_at": "2026-07-04T14:20:00.000Z"
+        }
+      ]
+    },
+    "demo-dmitry": {
+      "id": "demo-dmitry",
+      "created_at": "2026-07-04T13:01:00.000Z",
+      "updated_at": "2026-07-04T13:05:00.000Z",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Здравствуйте, интересует пересадка волос. Какие методы вы предлагаете?",
+          "created_at": "2026-07-04T13:01:00.000Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Здравствуйте! В наших клиниках-партнёрах в Тбилиси доступны методы FUE и DHI — оба малоинвазивные, без линейных шрамов. Стоимость обычно значительно ниже, чем в Западной Европе, а врачи говорят по-русски. Подскажите, пожалуйста, из какой вы страны и когда планируете процедуру?",
+          "created_at": "2026-07-04T13:02:00.000Z"
+        },
+        {
+          "role": "user",
+          "content": "Из Москвы. Хотел бы этим летом. Дмитрий, dmitry.sokolov@yandex.ru",
+          "created_at": "2026-07-04T13:04:00.000Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Спасибо, Дмитрий! Лето — отличное время. Наш специалист Гиорги Беридзе свяжется с вами по электронной почте с индивидуальным планом и расчётом стоимости в течение рабочего дня. Если появятся вопросы — пишите сюда в любое время.",
+          "created_at": "2026-07-04T13:05:00.000Z"
+        }
+      ]
+    },
+    "demo-anna": {
+      "id": "demo-anna",
+      "created_at": "2026-07-04T11:33:00.000Z",
+      "updated_at": "2026-07-04T11:40:00.000Z",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Guten Tag, ich interessiere mich für eine IVF-Behandlung. Bieten Sie das an?",
+          "created_at": "2026-07-04T11:33:00.000Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Guten Tag! Ja, unsere Partnerkliniken in Tbilissi sind auf IVF und Kinderwunschbehandlungen spezialisiert, mit erfahrenen Reproduktionsmedizinern und modernen Laboren. Darf ich fragen, aus welchem Land Sie kommen und ob Sie bereits Voruntersuchungen hatten?",
+          "created_at": "2026-07-04T11:34:00.000Z"
+        },
+        {
+          "role": "user",
+          "content": "Aus München. Wir informieren uns gerade erst, haben noch nichts geplant.",
+          "created_at": "2026-07-04T11:38:00.000Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Das verstehe ich gut — nehmen Sie sich alle Zeit, die Sie brauchen. Ich kann Ihnen gerne unverbindlich Informationen zu Ablauf, Erfolgsraten und Kosten zusammenstellen. Möchten Sie, dass eine unserer Fertility-Beraterinnen Ihnen das per E-Mail schickt?",
+          "created_at": "2026-07-04T11:40:00.000Z"
+        }
+      ]
+    },
+    "demo-visitor": {
+      "id": "demo-visitor",
+      "created_at": "2026-07-04T10:11:00.000Z",
+      "updated_at": "2026-07-04T10:15:00.000Z",
+      "messages": [
+        {
+          "role": "user",
+          "content": "just curious what a nose job costs",
+          "created_at": "2026-07-04T10:11:00.000Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Happy to help! Rhinoplasty at our partner clinics in Tbilisi typically ranges from about $2,500–$4,500 depending on whether it's purely cosmetic or also functional — a good deal less than typical US pricing, with board-certified surgeons. Is this something you're thinking about for yourself, and if so, any rough timeframe? No pressure at all — happy to just answer questions.",
+          "created_at": "2026-07-04T10:12:00.000Z"
+        },
+        {
+          "role": "user",
+          "content": "just browsing for now thanks",
+          "created_at": "2026-07-04T10:14:00.000Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Totally understand — browse away! Whenever you'd like ballpark costs, before/after examples, or details on recovery and travel, I'm right here. 😊",
+          "created_at": "2026-07-04T10:15:00.000Z"
+        }
+      ]
+    }
+  },
+  "leads": {
+    "demo-james": {
+      "conversation_id": "demo-james",
+      "name": "James Carter",
+      "email": "james.carter@gmail.com",
+      "phone": "+44 7700 900123",
+      "country": "United Kingdom",
+      "language": "English",
+      "procedure": "Full upper-arch dental implants",
+      "category": "dental",
+      "category_label": "Dental & Implants",
+      "timeframe": "Next 1–2 months",
+      "budget": null,
+      "status": "hot",
+      "assigned_manager": "Nino Kapanadze",
+      "notes": "Wants a full upper-arch implant treatment; travelling from Manchester within 1–2 months. Gave email and phone — ready for a specialist quote.",
+      "created_at": "2026-07-04T14:13:00.000Z",
+      "updated_at": "2026-07-04T14:20:00.000Z"
+    },
+    "demo-dmitry": {
+      "conversation_id": "demo-dmitry",
+      "name": "Дмитрий Соколов",
+      "email": "dmitry.sokolov@yandex.ru",
+      "phone": null,
+      "country": "Russia",
+      "language": "Русский",
+      "procedure": "Пересадка волос (FUE / DHI)",
+      "category": "hair",
+      "category_label": "Hair Transplant",
+      "timeframe": "Это лето",
+      "budget": null,
+      "status": "hot",
+      "assigned_manager": "Giorgi Beridze",
+      "notes": "Интересует пересадка волос методом FUE/DHI, из Москвы, планирует этим летом. Оставил email — готов к консультации специалиста.",
+      "created_at": "2026-07-04T13:02:00.000Z",
+      "updated_at": "2026-07-04T13:05:00.000Z"
+    },
+    "demo-anna": {
+      "conversation_id": "demo-anna",
+      "name": "Anna Weber",
+      "email": null,
+      "phone": null,
+      "country": "Germany",
+      "language": "Deutsch",
+      "procedure": "IVF / Kinderwunschbehandlung",
+      "category": "fertility",
+      "category_label": "IVF & Fertility",
+      "timeframe": "Informiert sich noch",
+      "budget": null,
+      "status": "warm",
+      "assigned_manager": "Ana Chkheidze",
+      "notes": "Interessiert sich für IVF, aus München, noch in der Informationsphase — hat noch keine Kontaktdaten hinterlassen.",
+      "created_at": "2026-07-04T11:34:00.000Z",
+      "updated_at": "2026-07-04T11:40:00.000Z"
+    },
+    "demo-visitor": {
+      "conversation_id": "demo-visitor",
+      "name": null,
+      "email": null,
+      "phone": null,
+      "country": "United States",
+      "language": "English",
+      "procedure": "Rhinoplasty (cosmetic)",
+      "category": "cosmetic",
+      "category_label": "Plastic & Cosmetic Surgery",
+      "timeframe": "Just browsing",
+      "budget": null,
+      "status": "cold",
+      "assigned_manager": "Tamar Lomidze",
+      "notes": "Casually asked about rhinoplasty pricing; just browsing, no timeframe or contact details.",
+      "created_at": "2026-07-04T10:12:00.000Z",
+      "updated_at": "2026-07-04T10:15:00.000Z"
+    }
+  },
+  "followups": {
+    "demo-james": [
+      {
+        "conversation_id": "demo-james",
+        "language": "English",
+        "email_subject": "Still here whenever you're ready — your Tbilisi dental plan",
+        "email_body": "Hi James, I wanted to gently check back after our chat about a full upper-arch implant treatment at Caucasus Medical Center in Tbilisi. Whenever you're ready, our coordinator Nino can prepare a precise plan and quote for your case. No rush at all — just reply with any questions.",
+        "whatsapp": "Hi James! Just checking in about your dental implant treatment in Tbilisi 😊 Happy to prepare an exact plan and quote whenever you're ready — no rush!",
+        "created_at": "2026-07-05T06:00:00.000Z"
+      }
+    ],
+    "demo-anna": [
+      {
+        "conversation_id": "demo-anna",
+        "language": "Deutsch",
+        "email_subject": "Ihre IVF-Anfrage – wir sind weiterhin für Sie da",
+        "email_body": "Hallo Anna,\n\nvor einer Woche haben Sie sich über eine IVF-Behandlung in unseren Partnerkliniken in Tbilissi informiert. Ich wollte mich kurz melden und fragen, ob noch Fragen offen sind – zu Ablauf, Erfolgsraten oder Kosten. Gerne stelle ich Ihnen unverbindlich alle Informationen zusammen.\n\nHerzliche Grüße,\nAna",
+        "whatsapp": "Hallo Anna, hier ist Ana von MediLead. Falls Sie noch Fragen zur IVF-Behandlung haben, bin ich gerne für Sie da – melden Sie sich einfach. 🙂",
+        "created_at": "2026-07-04T15:02:00.000Z"
+      }
+    ]
+  }
+}

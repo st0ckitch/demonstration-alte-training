@@ -44,6 +44,27 @@ Open **http://localhost:3200**, click **API key**, paste your Anthropic key, and
 Then open **/dashboard** to watch leads land. (Optionally `cp .env.example .env` to set a
 server‑side key or the port instead of pasting.)
 
+## Deploy a permanent URL (Render)
+
+The app is a plain Node server, so it needs a Node host (GitHub Pages can't run it).
+Two steps and you get an always‑on URL:
+
+1. **Push to GitHub** (from this folder):
+   ```bash
+   git push -u origin main
+   ```
+2. **Deploy on Render** — click the button (it reads `render.yaml`):
+
+   [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/st0ckitch/demonstration-alte-training)
+
+   Sign in with GitHub → **Apply**. You get a fixed `*.onrender.com` URL that stays up 24/7,
+   independent of your machine. Visitors paste their own Anthropic key, or set
+   `ANTHROPIC_API_KEY` in Render → Environment so the chat works with no paste.
+
+The deployed CRM starts pre‑populated from `data/seed.json` (the sample leads) so it looks
+alive on first load. Note: Render's free filesystem is ephemeral, so leads captured live
+reset on redeploy — add a Render disk (or a database) for durable storage.
+
 ## Stack
 
 - **Model:** `claude-opus-4-8` (override with `MEDILEAD_MODEL`)
