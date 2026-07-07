@@ -16,6 +16,7 @@ import {
   SAVE_LEAD_TOOL,
   REQUEST_CONTACT_TOOL,
   FOLLOWUP_TOOL,
+  WEB_TOOLS,
   CATEGORIES,
 } from "./lib/concierge.js";
 import {
@@ -161,19 +162,61 @@ async function handleChat(req, res) {
   const messages = getHistoryForModel(sessionId);
   let showForm = false;
 
+  // Client tools (we execute) + Anthropic server tools (web search/fetch,
+  // executed on their side and returned inline). If this key's org doesn't have
+  // web search enabled, the first call 400s — we then drop the web tools and
+  // carry on, so the chat never breaks.
+  let tools = [SAVE_LEAD_TOOL, REQUEST_CONTACT_TOOL, ...WEB_TOOLS];
+  let webDropped = false;
+
   try {
-    for (let step = 0; step < 5; step++) {
-      const response = await callClaude(apiKey, {
-        model: MODEL,
-        max_tokens: MAX_TOKENS,
-        system: CONCIERGE_SYSTEM_PROMPT,
-        tools: [SAVE_LEAD_TOOL, REQUEST_CONTACT_TOOL],
-        messages,
-      });
+    for (let step = 0; step < 8; step++) {
+      let response;
+      try {
+        response = await callClaude(apiKey, {
+          model: MODEL,
+          max_tokens: MAX_TOKENS,
+          system: CONCIERGE_SYSTEM_PROMPT,
+          tools,
+          messages,
+        });
+      } catch (err) {
+        if (!webDropped && err?.status === 400 && tools.length > 2) {
+          webDropped = true;
+          tools = [SAVE_LEAD_TOOL, REQUEST_CONTACT_TOOL];
+          console.error("web tools unavailable — retrying without them:", err?.message || err);
+          response = await callClaude(apiKey, {
+            model: MODEL,
+            max_tokens: MAX_TOKENS,
+            system: CONCIERGE_SYSTEM_PROMPT,
+            tools,
+            messages,
+          });
+        } else {
+          throw err;
+        }
+      }
+
+      // Server tools (web search/fetch) can pause the turn when they hit their
+      // internal step limit — re-send the accumulated content to continue.
+      if (response.stop_reason === "pause_turn") {
+        messages.push({ role: "assistant", content: response.content });
+        continue;
+      }
 
       if (response.stop_reason === "tool_use") {
-        const toolUses = (response.content || []).filter((b) => b.type === "tool_use");
+        // Only our client tools need executing; server_tool_use blocks are
+        // already resolved inline by the API.
+        const toolUses = (response.content || []).filter(
+          (b) => b.type === "tool_use" && (b.name === "save_lead" || b.name === "request_contact")
+        );
         messages.push({ role: "assistant", content: response.content });
+
+        if (!toolUses.length) {
+          // Nothing for us to do (e.g. only server tools ran) — let the model continue.
+          messages.push({ role: "user", content: "Continue." });
+          continue;
+        }
 
         const toolResults = [];
         for (const tu of toolUses) {
