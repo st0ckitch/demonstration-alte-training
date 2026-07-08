@@ -106,29 +106,41 @@ function apiKeyFrom(req) {
   return pasted || (process.env.ANTHROPIC_API_KEY || "").trim();
 }
 
-async function callClaude(apiKey, body) {
-  let res;
+async function callClaude(apiKey, body, timeoutMs = 55000) {
+  // Hard timeout so a slow/stalled request (e.g. a long web search) can never
+  // hang the chat forever — it fails cleanly and the user can retry.
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    res = await fetch(ANTHROPIC_URL, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify(body),
-    });
-  } catch (netErr) {
-    throw Object.assign(new Error("Could not reach the Claude API. Check your connection."), { status: 502 });
+    let res;
+    try {
+      res = await fetch(ANTHROPIC_URL, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "x-api-key": apiKey,
+          "anthropic-version": "2023-06-01",
+        },
+        body: JSON.stringify(body),
+        signal: controller.signal,
+      });
+    } catch (netErr) {
+      if (netErr?.name === "AbortError") {
+        throw Object.assign(new Error("The reply took too long. Please try again."), { status: 504 });
+      }
+      throw Object.assign(new Error("Could not reach the Claude API. Check your connection."), { status: 502 });
+    }
+    if (!res.ok) {
+      let detail = "";
+      try { detail = (await res.json())?.error?.message || ""; } catch { /* ignore */ }
+      const e = new Error(detail || `Claude API error (${res.status}).`);
+      e.status = res.status;
+      throw e;
+    }
+    return await res.json();
+  } finally {
+    clearTimeout(timer);
   }
-  if (!res.ok) {
-    let detail = "";
-    try { detail = (await res.json())?.error?.message || ""; } catch { /* ignore */ }
-    const e = new Error(detail || `Claude API error (${res.status}).`);
-    e.status = res.status;
-    throw e;
-  }
-  return res.json();
 }
 
 function friendlyClaudeError(err) {
@@ -169,29 +181,30 @@ async function handleChat(req, res) {
   let tools = [SAVE_LEAD_TOOL, REQUEST_CONTACT_TOOL, ...WEB_TOOLS];
   let webDropped = false;
 
+  // Overall budget for the whole turn so it can never hang the UI.
+  const deadline = Date.now() + 50000;
+
   try {
-    for (let step = 0; step < 8; step++) {
+    for (let step = 0; step < 6; step++) {
+      if (Date.now() > deadline) break; // out of budget — fall through to a graceful reply
+      const remaining = Math.max(8000, deadline - Date.now());
       let response;
       try {
-        response = await callClaude(apiKey, {
-          model: MODEL,
-          max_tokens: MAX_TOKENS,
-          system: CONCIERGE_SYSTEM_PROMPT,
-          tools,
-          messages,
-        });
+        response = await callClaude(
+          apiKey,
+          { model: MODEL, max_tokens: MAX_TOKENS, system: CONCIERGE_SYSTEM_PROMPT, tools, messages },
+          remaining
+        );
       } catch (err) {
         if (!webDropped && err?.status === 400 && tools.length > 2) {
           webDropped = true;
           tools = [SAVE_LEAD_TOOL, REQUEST_CONTACT_TOOL];
           console.error("web tools unavailable — retrying without them:", err?.message || err);
-          response = await callClaude(apiKey, {
-            model: MODEL,
-            max_tokens: MAX_TOKENS,
-            system: CONCIERGE_SYSTEM_PROMPT,
-            tools,
-            messages,
-          });
+          response = await callClaude(
+            apiKey,
+            { model: MODEL, max_tokens: MAX_TOKENS, system: CONCIERGE_SYSTEM_PROMPT, tools, messages },
+            Math.max(8000, deadline - Date.now())
+          );
         } else {
           throw err;
         }
@@ -213,9 +226,18 @@ async function handleChat(req, res) {
         messages.push({ role: "assistant", content: response.content });
 
         if (!toolUses.length) {
-          // Nothing for us to do (e.g. only server tools ran) — let the model continue.
-          messages.push({ role: "user", content: "Continue." });
-          continue;
+          // No client tool to run (e.g. only a server tool ran) — return whatever
+          // text came back rather than looping.
+          const reply = (response.content || [])
+            .filter((b) => b.type === "text")
+            .map((b) => b.text)
+            .join("\n")
+            .trim();
+          if (reply) {
+            addMessage(sessionId, "assistant", reply);
+            return sendJSON(res, 200, { reply, form: showForm, lead: getLead(sessionId) });
+          }
+          continue; // no text yet — let it produce a reply on the next pass
         }
 
         const toolResults = [];
